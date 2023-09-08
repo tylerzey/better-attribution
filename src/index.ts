@@ -60,10 +60,13 @@ export const betterAttribution = (opts?: {
       paramsWithValue.push({ param: "referrer", value: referrer });
     }
 
-    return paramsWithValue.reduce((acc, cur) => {
-      acc[cur.param] = cur.value;
-      return acc;
-    }, {} as Record<string, string>);
+    return paramsWithValue.reduce(
+      (acc, cur) => {
+        acc[cur.param] = cur.value;
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
   };
 
   const storeAttributionValues = () => {
