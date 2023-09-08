@@ -1,0 +1,39 @@
+{
+  "name": "better-attribution",
+  "version": "0.0.0",
+  "description": "Track first and last attr",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylerzey/better-file-downloader.git"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build-fast": "tsup src/index.ts --format cjs,esm",
+    "build": "yarn run build-fast -- --dts-resolve",
+    "lint": "prettier --write .",
+    "prepublishOnly": "yarn run build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
+    "prettier": "2.8.4",
+    "tsup": "6.6.3",
+    "typescript": "4.9.5",
+    "vitest": "0.28.5"
+  },
+  "dependencies": {
+    "js-cookie": "3.0.5"
+  }
+}
