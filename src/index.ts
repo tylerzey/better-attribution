@@ -16,11 +16,28 @@ export const DefaultQueryParams = [
   "gc_id",
 ];
 
-export const betterAttribution = (opts?: {
+export interface BetterAttribution {
+  /**
+   * A list of query params to store from the url
+   * You can import {DefaultQueryParams} from 'better-attribution' if you'd like to add onto our list.
+   *
+   * @example [... DefaultQueryParams, 'utm_source', 'utm_medium', 'utm_campaign']
+   **/
   queryParams?: string[];
+  /**
+   * A prefix to add to the cookie keys. This is useful if you want to use this library multiple times.
+   * The first and last touch keys will be prefixed with this value.
+   * @example bobs_widgets becomes bobs_widgets_first_touch
+   */
   cookiePrefix?: string;
+  /**
+   * The domain to set the cookie on. Defaults to the current domain.
+   * @example .example.com
+   **/
   domain?: string;
-}) => {
+}
+
+export const betterAttribution = (opts?: BetterAttribution) => {
   const vendor = opts?.cookiePrefix || "internal";
   const firstTouchKey = `${vendor}_first_touch`;
   const lastTouchKey = `${vendor}_last_touch`;

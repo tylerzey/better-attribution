@@ -7,27 +7,18 @@
 ```js
 import { betterAttribution, DefaultQueryParams } from "better-attribution";
 
-const { storeAttributionValues, getLastTouch, getFirstTouch } =
-  betterAttribution();
+const attr = betterAttribution();
 
 // Stores the current URL query params and referrer in a cross site cookie
-storeAttributionValues();
+attr.storeAttributionValues();
 
-// Retrieves an object of the query params and referrer from the latest visit
-const lastParams = getLastTouch();
+// JSON from the latest visit
+const lastParams = attr.getLastTouch();
+console.log(lastParams); // {referrer: 'facebook.com', fbclid: 'abc-123'}
 
-// Retrieves an object of the query params and referrer from the first visit
-const firstParams = getFirstTouch();
-
-// optional arguments:
-betterAttribution({
-  // allows tracking of additional (or fewer) query params
-  queryParams: [...DefaultQueryParams, "custom_known_query_param"],
-  // allows prefixing the cookie w a custom string
-  cookiePrefix: "custom_prefix",
-  // allows setting the cookie w a custom domain
-  domain: "example_2.com",
-});
+// JSON from the first visit
+const firstParams = attr.getFirstTouch();
+console.log(lastParams); // {utm_term: 'first-visit-term', referrer: 'google.com'}
 ```
 
 Features:
@@ -51,6 +42,20 @@ Default list of tracked query params (you can override this in the setup functio
 - ad_id
 - gclid
 - gc_id
+
+Customization:
+
+```js
+// All arguments are optional
+const attr = betterAttribution({
+  // allows tracking of additional (or fewer) query params
+  queryParams: [...DefaultQueryParams, "custom_known_query_param"],
+  // allows prefixing the cookie w a custom string
+  cookiePrefix: "custom_prefix",
+  // allows setting the cookie w a custom domain
+  domain: "example_2.com",
+});
+```
 
 ## Install
 
