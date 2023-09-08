@@ -87,6 +87,8 @@ export const betterAttribution = (opts?: {
   };
 
   return {
+    firstTouchKey,
+    lastTouchKey,
     getLastTouch,
     getFirstTouch,
     getCurrentParams,
