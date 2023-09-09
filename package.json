@@ -1,12 +1,19 @@
 {
   "name": "better-attribution",
   "version": "1.0.1",
-  "description": "Track first and last attr",
+  "description": "Allows you to easily tracks & store first/last touch attribution in cookies to enable multi-touch attribution. Tracks UTMs, Facebook, Google Ads, and more automatically.",
   "publishConfig": {
     "access": "public"
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "attribution",
+    "first touch",
+    "last touch",
+    "utm tracking",
+    "attribution cookie tracking"
   ],
   "repository": {
     "type": "git",
