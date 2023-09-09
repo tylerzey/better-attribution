@@ -1,6 +1,6 @@
 {
   "name": "better-attribution",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Allows you to easily tracks & store first/last touch attribution in cookies to enable multi-touch attribution. Tracks UTMs, Facebook, Google Ads, and more automatically.",
   "publishConfig": {
     "access": "public"
@@ -36,9 +36,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",
+    "prettier": "3.0.3",
     "tsup": "7.2.0",
     "typescript": "5.2.2",
-    "prettier": "3.0.3",
     "vitest": "0.34.4"
   },
   "dependencies": {
