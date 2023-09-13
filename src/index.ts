@@ -1,7 +1,6 @@
 import type { CookieAttributes } from "js-cookie";
 import Cookie from "js-cookie";
 import { isNotNil } from "./isNotNil";
-import { prefixObject } from "./prefixObject";
 
 export const DefaultQueryParams = [
   "utm_source",
@@ -14,16 +13,16 @@ export const DefaultQueryParams = [
   "ad_id",
   "gclid",
   "gc_id",
-];
+] as const;
 
-export interface BetterAttribution {
+export interface BetterAttribution<T extends readonly string[]> {
   /**
    * A list of query params to store from the url
    * You can import {DefaultQueryParams} from 'better-attribution' if you'd like to add onto our list.
    *
    * @example [... DefaultQueryParams, 'utm_source', 'utm_medium', 'utm_campaign']
    **/
-  queryParams?: string[];
+  queryParams?: T;
   /**
    * A prefix to add to the cookie keys. This is useful if you want to use this library multiple times.
    * The first and last touch keys will be prefixed with this value.
@@ -37,7 +36,11 @@ export interface BetterAttribution {
   domain?: string;
 }
 
-export const betterAttribution = (opts?: BetterAttribution) => {
+export const betterAttribution = <
+  T extends readonly string[] = typeof DefaultQueryParams,
+>(
+  opts?: BetterAttribution<T>,
+) => {
   const vendor = opts?.cookiePrefix || "internal";
   const firstTouchKey = `${vendor}_first_touch`;
   const lastTouchKey = `${vendor}_last_touch`;
@@ -51,16 +54,16 @@ export const betterAttribution = (opts?: BetterAttribution) => {
     secure: false,
   };
 
-  const getFirstTouch = (): Record<string, string> => {
+  const getFirstTouch = (): Record<T[number], string | undefined> => {
     const f = Cookie.get(firstTouchKey);
     const object = f ? JSON.parse(f) : {};
-    return prefixObject("first_", object);
+    return object;
   };
 
-  const getLastTouch = (): Record<string, string> => {
+  const getLastTouch = (): Record<T[number], string | undefined> => {
     const l = Cookie.get(lastTouchKey);
     const object = l ? JSON.parse(l) : {};
-    return prefixObject("last_", object);
+    return object;
   };
 
   const getCurrentParams = () => {

@@ -18,7 +18,7 @@ console.log(lastParams); // {referrer: 'facebook.com', fbclid: 'abc-123'}
 
 // JSON from the first visit
 const firstParams = attr.getFirstTouch();
-console.log(lastParams); // {utm_term: 'first-visit-term', referrer: 'google.com'}
+console.log(firstParams); // {utm_term: 'first-visit-term', referrer: 'google.com'}
 ```
 
 Features:
@@ -49,12 +49,13 @@ Customization:
 // All arguments are optional
 const attr = betterAttribution({
   // allows tracking of additional (or fewer) query params
-  queryParams: [...DefaultQueryParams, "custom_known_query_param"],
+  queryParams: [...DefaultQueryParams, "custom_known_query_param"] as const,
   // allows prefixing the cookie w a custom string
   cookiePrefix: "custom_prefix",
   // allows setting the cookie w a custom domain
   domain: "example_2.com",
 });
+attr.getFirstTouch().custom_known_query_param // undefined | string
 ```
 
 ## Install
