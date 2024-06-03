@@ -44,6 +44,8 @@ export const betterAttribution = <
   const vendor = opts?.cookiePrefix || "internal";
   const firstTouchKey = `${vendor}_first_touch`;
   const lastTouchKey = `${vendor}_last_touch`;
+  const gcIdKey = `${vendor}_gc_id`;
+  const fbclidKey = `${vendor}_fbclid`;
 
   const queryParams = opts?.queryParams || DefaultQueryParams;
 
@@ -104,6 +106,15 @@ export const betterAttribution = <
 
     console.debug("storing last touch", val);
     Cookie.set(lastTouchKey, JSON.stringify(val), cookieOpts);
+
+
+    if (val.fbclid) {
+      Cookie.set(fbclidKey, val.fbclid, cookieOpts);
+    }
+
+    if (val.gclid) {
+      Cookie.set(gcIdKey, val.gclid, cookieOpts);
+    }
   };
 
   return {
