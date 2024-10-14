@@ -41,7 +41,7 @@
     "prettier": "3.0.3",
     "tsup": "7.2.0",
     "typescript": "5.2.2",
-    "vitest": "0.34.6"
+    "vitest": "2.1.3"
   },
   "dependencies": {
     "js-cookie": "3.0.5"
